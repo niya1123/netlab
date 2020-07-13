@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rules.apps.AutodiscoverRulesConfig',
     'bootstrap4',
+    'sns_app',
+    'accounts',
 ]
 
 MIDDLEWARE = [
