@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = 'SNSサイト' 
+
 urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', include('sns_app.urls')),
