@@ -130,3 +130,10 @@ AUTHENTICATION_BACKENDS = (
     'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+# カスタムユーザモデル
+AUTH_USER_MODEL = 'accounts.User'
+
+# ログイン遷移の設定
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'accounts:profile'
