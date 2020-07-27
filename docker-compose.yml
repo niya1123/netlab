@@ -5,7 +5,7 @@ services:
     django:
         # appディレクトリの中から`Dockerfile`を探す
         build: ./app
-        container_name: sns_django
+        container_name: sns
         # サービス起動後に入力されるコマンドを設定
         # buildで指定したDockerfileの位置がカレントディレクトリになるので注意
         command: gunicorn sns_project.wsgi:application --bind 0.0.0.0:8000
