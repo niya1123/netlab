@@ -23,11 +23,11 @@
         <ul class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
           <li>
-            <a class="nav-item nav-link" href="{% url 'logout' %}">ログアウト</a>
+            <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-item nav-link" href="{% url 'login' %}">
+            <a class="nav-item nav-link" href="{% url 'accounts:login' %}">
             ようこそ、ゲスト！ログインはこちら
           </a>
           </li>
