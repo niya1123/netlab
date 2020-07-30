@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'sns_app',
     'accounts',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
@@ -132,7 +133,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # カスタムユーザモデル
-AUTH_USER_MODEL = 'accounts.User'
+# AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'user_profile.User'
 
 # ログイン遷移の設定
 LOGIN_URL = 'accounts:login'
