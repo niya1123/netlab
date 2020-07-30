@@ -1,122 +1,53 @@
-from django.conf import settings
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.views import (
-    LoginView, LogoutView
-)
-from django.views import generic
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.signing import BadSignature, SignatureExpired, loads, dumps
-from django.http import Http404, HttpResponseBadRequest
-from django.shortcuts import redirect
-from django.template.loader import render_to_string
-from .forms import (
-    LoginForm, UserCreateForm
-)
+from datetime import date
+
+from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import login as auth_login
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect, render
+
+from .forms import ProfileForm, SignUpForm, LoginForm
+from .models import Profile
 
 User = get_user_model()
 
 def test(request):
     return HttpResponse("Hello, world. You're at the test index.")
 
-def signup(request):
+def sign_up(request):
     """
     登録ビュー.
     """
-    ctx={'title': 'ユーザ登録画面'}
-    return render(request, 'accounts/signup.html', ctx)
+    if request.method == 'POST':
+        signup_form = SignUpForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if signup_form.is_valid() and profile_form.is_valid():
+            username = signup_form.cleaned_data.get('username')
+            email = signup_form.cleaned_data.get('email')
+            password = signup_form.cleaned_data.get('password')
+            gender = profile_form.cleaned_data.get('gender')
+            birth_year = profile_form.cleaned_data.get('birth_year')
+            birth_month = profile_form.cleaned_data.get('birth_month')
+            birth_day = profile_form.cleaned_data.get('birth_day')
 
-class Profile(generic.TemplateView):
-    template_name = 'accounts/profile.html'
+            user = User.objects.create_user(username, email, password)
+            user.profile.gender = gender
+            if birth_day and birth_month and birth_year:
+                birth_date = date(int(birth_year), int(birth_month), int(birth_day)).isoformat()
+                user.profile.birth_date = birth_date
+            user.save()
 
+            user = authenticate(request, username=username, password=password)
+            auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.add_message(request, messages.SUCCESS, 'ユーザー登録が完了しました！')
+            return redirect('top')
+    else:
+        signup_form = SignUpForm()
+        profile_form = ProfileForm()
 
-class Login(LoginView):
-    """
-    ログインページ
-    """
-    form_class = LoginForm
-    template_name = 'accounts/login.html'
-
-
-class Logout(LogoutView):
-    """
-    ログアウトページ
-    """
-    template_name = 'sns_app/index.html'
-
-class UserCreate(generic.CreateView):
-    """
-    ユーザ仮登録
-    """
-    template_name = 'accounts/user_create.html'
-    form_class = UserCreateForm
-
-    def form_valid(self, form):
-        """
-        仮登録と本登録用メールの発行.
-        """
-        user = form.save(commit=False)
-        user.is_active = False
-        user.save()
-
-        current_site = get_current_site(self.request)
-        domain = current_site.domain
-        context = {
-            'procotol': self.request.scheme,
-            'domain': domain,
-            'token': dumps(user.pk),
-            'user': user,
-        }
-
-        subject = render_to_string('mail/create/subject.txt', context)
-        message = render_to_string('mail/create/message.txt', context)
-
-        user.email_user(subject, message)
-        return redirect('accounts:user_create_done')
-
-class UserCreateDone(generic.TemplateView):
-    """
-    ユーザー仮登録完了
-    """
-    template_name = 'accounts/user_create_done.html'
-
-
-class UserCreateComplete(generic.TemplateView):
-    """
-    メール内URLアクセス後のユーザー本登録
-    """
-    template_name = 'accounts/user_create_complete.html'
-    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)  # デフォルトでは1日以内
-
-    def get(self, request, **kwargs):
-        """
-        tokenをとってきて,  合っていれば本登録.
-        """
-        token = kwargs.get('token')
-        try:
-            user_pk = loads(token, max_age=self.timeout_seconds)
-
-        # 期限切れ
-        except SignatureExpired:
-            return HttpResponseBadRequest()
-
-        # tokenが間違っている
-        except BadSignature:
-            return HttpResponseBadRequest()
-
-        # tokenは問題なし
-        else:
-            try:
-                user = User.objects.get(pk=user_pk)
-            except User.DoesNotExist:
-                return HttpResponseBadRequest()
-            else:
-                if not user.is_active:
-                    # 問題なければ本登録とする
-                    user.is_active = True
-                    user.save()
-                    return super().get(request, **kwargs)
-
-        return HttpResponseBadRequest()
+    login_form = LoginForm()
+    context = {
+        'signup_form': signup_form,
+        'profile_form': profile_form,
+    }
+    return render(request, 'accounts/sign_up.html', context)

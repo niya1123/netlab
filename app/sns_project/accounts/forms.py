@@ -1,34 +1,71 @@
+from datetime import datetime
+
 from django import forms
-from django.contrib.auth.forms import (
-    AuthenticationForm, UserCreationForm
-)
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
+from .models import Profile
 
 User = get_user_model()
 
-
 class LoginForm(AuthenticationForm):
     """ログインフォーム"""
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-            field.widget.attrs['placeholder'] = field.label  # placeholderにフィールドのラベルを入れる
+            # field.widget.attrs['placeholder'] = field.label  # placeholderにフィールドのラベルを入れる
 
-class UserCreateForm(UserCreationForm):
-    """ユーザー登録用フォーム"""
+class SignUpForm(UserCreationForm):
+    """
+    ユーザ登録用フォーム.
+    """
+    password = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(required=False)
+    password2 = password1
 
     class Meta:
         model = User
-        fields = ('email',)
+        fields = ('username', 'email', 'password')
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+class ProfileForm(forms.ModelForm):
+    CHOICES = (
+        ('female', '女性',),
+        ('male', '男性',),
+        ('not_applicable', 'その他',)
+    )
+    gender = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES, required=False)
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        User.objects.filter(email=email, is_active=False).delete()
-        return email
+    def make_select_object(from_x, to_y, dates, increment=True):
+        if increment:
+            for i in range(from_x, to_y):
+                dates.append([i, i])
+        else:
+            for i in range(from_x, to_y, -1):
+                dates.append([i, i])
+        return dates
+
+    def make_select_field(select_object):
+        dates_field = forms.ChoiceField(
+            widget=forms.Select,
+            choices=select_object,
+            required=False
+        )
+        return dates_field
+
+    years = [["",""]]
+    current_year = datetime.now().year
+    years = make_select_object(current_year, current_year-80, years, increment=False)
+    birth_year = make_select_field(years)
+
+    months = [["",""]]
+    months = make_select_object(1, 13, months)
+    birth_month = make_select_field(months)
+
+    days = [["",""]]
+    days = make_select_object(1, 32, days)
+    birth_day = make_select_field(days)
+
+    class Meta:
+        model = Profile
+        fields = ('gender', 'birth_year', 'birth_month', 'birth_day')
