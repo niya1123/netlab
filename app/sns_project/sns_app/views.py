@@ -5,5 +5,5 @@ def top(request):
     """
     topページ.
     """
-    ctx={'title': 'SNSから身を守ろう!'}
+    ctx={'title': 'LearnSNS'}
     return render(request, 'sns_app/index.html', ctx)
