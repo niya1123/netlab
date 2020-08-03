@@ -136,7 +136,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # ログイン遷移の設定
 LOGIN_URL = 'accounts:login'
-LOGIN_REDIRECT_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'top'
 
 # メールをコンソールに表示する. 開発用
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
