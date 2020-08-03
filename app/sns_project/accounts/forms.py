@@ -8,7 +8,9 @@ User = get_user_model()
 
 
 class LoginForm(AuthenticationForm):
-    """ログインフォーム"""
+    """
+    ログインフォーム
+    """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,7 +19,9 @@ class LoginForm(AuthenticationForm):
             field.widget.attrs['placeholder'] = field.label  # placeholderにフィールドのラベルを入れる
 
 class UserCreateForm(UserCreationForm):
-    """ユーザー登録用フォーム"""
+    """
+    ユーザー登録用フォーム
+    """
 
     class Meta:
         model = User
@@ -32,3 +36,17 @@ class UserCreateForm(UserCreationForm):
         email = self.cleaned_data['email']
         User.objects.filter(email=email, is_active=False).delete()
         return email
+
+class ProfileUpdateForm(forms.ModelForm):
+    """
+    ユーザープロファイル更新フォーム
+    """
+
+    class Meta:
+        model = User
+        fields = ('username', 'gender',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

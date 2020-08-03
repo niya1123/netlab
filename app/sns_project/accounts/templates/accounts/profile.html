@@ -1,4 +1,15 @@
 {% extends "accounts/base.html" %}
 {% block content %}
-<p>ここに、好きな内容を入れる。</p>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>ユーザー名</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>性別</th>
+            <td>{{ user.gender }}</td>
+        </tr>
+    </tbody>
+</table>
 {% endblock %}

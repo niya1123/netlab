@@ -1,36 +1,17 @@
 from django.conf import settings
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.views import (
-    LoginView, LogoutView
-)
-from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.signing import BadSignature, SignatureExpired, loads, dumps
-from django.http import Http404, HttpResponseBadRequest
-from django.shortcuts import redirect
+from django.core.signing import BadSignature, SignatureExpired, dumps, loads
+from django.http import Http404, HttpResponse, HttpResponseBadRequest
+from django.shortcuts import redirect, render, resolve_url
 from django.template.loader import render_to_string
-from .forms import (
-    LoginForm, UserCreateForm
-)
+from django.views import generic
+
+from .forms import LoginForm, UserCreateForm, ProfileUpdateForm
 
 User = get_user_model()
-
-def test(request):
-    return HttpResponse("Hello, world. You're at the test index.")
-
-def signup(request):
-    """
-    登録ビュー.
-    """
-    ctx={'title': 'ユーザ登録画面'}
-    return render(request, 'accounts/signup.html', ctx)
-
-class Profile(generic.TemplateView):
-    template_name = 'accounts/profile.html'
-
 
 class Login(LoginView):
     """
@@ -120,3 +101,33 @@ class UserCreateComplete(generic.TemplateView):
                     return super().get(request, **kwargs)
 
         return HttpResponseBadRequest()
+
+class OnlyYouMixin(UserPassesTestMixin):
+    """
+    ログインしているユーザ以外にアクセスすることを防止するもの.
+    """
+    raise_exception = True
+
+    def test_func(self):
+        user = self.request.user
+        return user.pk == self.kwargs['pk'] or user.is_superuser
+
+
+class Profile(OnlyYouMixin, generic.DetailView):
+    """
+    プロファイル.
+    """
+    model = User
+    template_name = 'accounts/profile.html'
+
+
+class ProfileUpdate(OnlyYouMixin, generic.UpdateView):
+    """
+    プロファイル更新
+    """
+    model = User
+    form_class = ProfileUpdateForm
+    template_name = 'accounts/profile_update.html'
+
+    def get_success_url(self):
+        return resolve_url('accounts:profile', pk=self.kwargs['pk'])

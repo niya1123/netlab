@@ -12,8 +12,8 @@
     <title>LearnSNS</title>
 </head>
 <body>
-    <!-- ナビバー -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <!-- ナビバー -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="{% url 'top' %}">LearnSNS</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,6 +22,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
+          <li>
+            <a class="nav-item nav-link" href="{% url 'accounts:profile' user.pk %}">ユーザー情報閲覧</a>
+          </li>
+          <li>
+            <a class="nav-item nav-link" href="{% url 'accounts:profile_update' user.pk %}">ユーザー情報更新</a>
+          </li>
           <li>
             <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
           </li>
