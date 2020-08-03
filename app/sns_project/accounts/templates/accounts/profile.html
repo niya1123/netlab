@@ -3,12 +3,16 @@
 <table class="table">
     <tbody>
         <tr>
+            <th>メールアドレス</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
             <th>ユーザー名</th>
             <td>{{ user.username }}</td>
         </tr>
         <tr>
             <th>性別</th>
-            <td>{{ user.gender }}</td>
+            <td>{{ user.get_gender_display }}</td>
         </tr>
     </tbody>
 </table>
