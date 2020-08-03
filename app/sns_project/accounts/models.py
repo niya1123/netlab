@@ -41,7 +41,7 @@ class CustomUserManager(UserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
-    username = models.CharField("ユーザ名", max_length=255, unique=True)
+    username = models.CharField(_('username'), max_length=255, unique=True)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
@@ -50,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('2', '男性'),
         ('3', 'その他'),
     )
-    gender = models.CharField("性別", max_length=3, choices=GENDER_CHOICES, blank=True)
+    gender = models.CharField(_('gender'), max_length=3, choices=GENDER_CHOICES, blank=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
