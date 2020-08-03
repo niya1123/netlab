@@ -112,14 +112,12 @@ class OnlyYouMixin(UserPassesTestMixin):
         user = self.request.user
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
-
 class Profile(OnlyYouMixin, generic.DetailView):
     """
     プロファイル.
     """
     model = User
     template_name = 'accounts/profile.html'
-
 
 class ProfileUpdate(OnlyYouMixin, generic.UpdateView):
     """
