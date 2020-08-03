@@ -50,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('2', '男性'),
         ('3', 'その他'),
     )
-    gender = models.CharField(_('gender'), max_length=3, choices=GENDER_CHOICES, blank=True)
+    gender = models.CharField(verbose_name="性別", max_length=3, choices=GENDER_CHOICES, blank=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
