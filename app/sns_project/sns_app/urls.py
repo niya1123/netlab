@@ -3,5 +3,5 @@ from . import views
 name = 'sns_app'
 
 urlpatterns = [
-    path('', views.top, name='top'),
+    path('', views.Top.as_view(), name='top'),
 ]
