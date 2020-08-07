@@ -66,6 +66,14 @@ class User(AbstractBaseUser, PermissionsMixin):
             'Unselect this instead of deleting accounts.'
         ),
     )
+    is_teacher = models.BooleanField(
+        _('teacher'),
+        default=False,
+        help_text=_(
+            'Specifies that the user is a teacher.'
+        ),
+    )
+    
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     objects = CustomUserManager()
