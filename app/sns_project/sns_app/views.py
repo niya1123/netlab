@@ -5,5 +5,4 @@ def top(request):
     """
     topページ.
     """
-    ctx={'title': 'LearnSNS'}
-    return render(request, 'sns_app/index.html', ctx)
+    template_name = 'sns_app/index.html'
