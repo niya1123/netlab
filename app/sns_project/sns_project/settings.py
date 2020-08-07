@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'sns_app',
     'accounts',
+    'contents',
 ]
 
 MIDDLEWARE = [
