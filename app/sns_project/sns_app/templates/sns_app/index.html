@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="content-language" content="ja">
-    <title>{{title}}</title>
-</head>
-<body>
-<h1>{{title}}</h1>
-{% if user.is_authenticated %}
-<p><a href="{% url 'accounts:profile' user.pk %}">ユーザー情報閲覧</a></p>
-<p><a href="{% url 'accounts:profile_update' user.pk %}">ユーザー情報更新</a></p>
-<p><a href="{% url 'accounts:logout' %}">ログアウト</a></p>
-{% else %}
-<p><a href="{% url 'accounts:login' %}">ログイン</a></p>
-{% endif %}
-</body>
+{% extends "accounts/base.html" %}
+{% block content %}
+<p>トップ</p>
+{% endblock %}
