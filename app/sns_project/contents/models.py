@@ -10,7 +10,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-class Contents(models.Model):
+class Content(models.Model):
     """コンテンツモデル"""
     title = models.CharField('タイトル', max_length=50)
     tags = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)
@@ -36,7 +36,7 @@ class Review(models.Model):
         (5, '★5'),
     )
     point = models.IntegerField('評価点', choices=SCORE_CHOICES)
-    target = models.ForeignKey(Contents, verbose_name='評価対象の本', on_delete=models.CASCADE)
+    target = models.ForeignKey(Content, verbose_name='評価対象の本', on_delete=models.CASCADE)
 
     def __str__(self):
         return '{} - {}'.format(self.target.title, self.get_point_display())

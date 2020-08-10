@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Tag, Contents, Review
+from .models import Tag, Content, Review
 # Register your models here.
 
-class ContentsAdmin(admin.ModelAdmin):
+class ContentAdmin(admin.ModelAdmin):
     search_fields = ('title', 'text')
     list_display = ['title', 'is_public', 'updated_at', 'created_at', 'title_len']
     list_filter = ['is_public', 'tags']
@@ -13,6 +13,6 @@ class ContentsAdmin(admin.ModelAdmin):
 
     title_len.short_description = 'タイトルの文字数'
 
-admin.site.register(Contents, ContentsAdmin)
+admin.site.register(Content, ContentAdmin)
 admin.site.register(Tag)
 admin.site.register(Review)
