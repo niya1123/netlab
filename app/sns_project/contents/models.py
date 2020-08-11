@@ -20,7 +20,7 @@ class Content(models.Model):
 
     is_public = models.BooleanField('公開する', default=True)
     question_description = models.TextField('問題の説明', max_length=130)
-    keywords = models.CharField('問題のキーワード', max_length=255, default='問題のキーワード')
+    keywords = models.CharField('問題のキーワード', max_length=255)
     created_at = models.DateTimeField('作成日', default=timezone.now)
     updated_at = models.DateTimeField('更新日', default=timezone.now)
 
