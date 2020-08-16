@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
@@ -13,6 +14,7 @@ class Tag(models.Model):
 
 class Content(models.Model):
     """コンテンツモデル"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField('タイトル', max_length=50)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)

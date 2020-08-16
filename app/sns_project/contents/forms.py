@@ -4,7 +4,7 @@ from .models import Content
 
 User = get_user_model()
 
-class CreateContentsFrom(forms.ModelForm):
+class CreateContentFrom(forms.ModelForm):
     """コンテンツ作成フォーム"""
 
     class Meta:
