@@ -17,7 +17,7 @@ class Content(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField('タイトル', max_length=50)
     tags = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)
-    question_text = models.TextField('本文')
+    question_text = models.TextField('問題文')
 
     is_public = models.BooleanField('公開する', default=True)
     question_description = models.TextField('問題の説明', max_length=130)
