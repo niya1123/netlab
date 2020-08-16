@@ -25,7 +25,7 @@ class UserCreateForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email','username', 'gender')
+        fields = ('email','username', 'gender', 'age')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -44,7 +44,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', )
+        fields = ('username', 'gender', 'age')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

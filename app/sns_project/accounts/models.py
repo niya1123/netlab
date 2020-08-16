@@ -51,6 +51,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('3', 'その他'),
     )
     gender = models.CharField(verbose_name="性別", max_length=3, choices=GENDER_CHOICES, blank=True)
+    AGE_CHOICES = (
+        ('0', '10歳未満'),
+        ('1', '10代'),
+        ('2', '20代'),
+        ('3', '30代'),
+        ('4', '40代'),
+        ('5', '50代'),
+        ('6', '60歳以上'),
+    )
+    age = models.CharField(verbose_name="年齢", max_length=7, choices=AGE_CHOICES, blank=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
