@@ -6,7 +6,7 @@ class CreateContentForm(forms.ModelForm):
 
     class Meta:
         model = Content
-        fields = ('title', 'author', 'tags', 'question_text', 
+        fields = ('title', 'tags', 'question_text', 
                   'is_public', 'question_description', 
         )
     
