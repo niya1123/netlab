@@ -43,7 +43,7 @@
   }
   
   .backend {
-    background-color: aqua;
+    background-color: whitesmoke;
     grid-column: 1;
     grid-row: 1;
   }
@@ -76,7 +76,7 @@
     color: #333;
   }
   
-  .category {
+  .author {
     margin-bottom: .5em;
   }
   

@@ -18,7 +18,7 @@
                         <div class="meta">
                             <h2 class="title">{{ content.title }}</h2>
 
-                            <p class="tag">作成者: {{ content.author }}</p>
+                            <p class="author">作成者: {{ content.author }}</p>
                             <p class="date">{{ content.created_at }}（
                                 <time class="updated_at"
                                     datetime="{{ content.updated_at | date:'Y-m-d' }}">{{ content.updated_at | naturaltime }}に更新
