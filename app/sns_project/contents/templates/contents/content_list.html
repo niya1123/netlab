@@ -1,0 +1,38 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static 'contents/content_list.css' %}">
+{% endblock %}
+{% block content %}
+<div id="menu">
+    <h1 class="container">全てのノート</h1>
+</div>
+<section id="list" class="container">
+    {% for content in content_list %}
+        <a class="box" href="">
+            <article class="box-inner">
+
+                <div class="mask">
+                    <div class="caption">Read More</div>
+                </div>
+                
+                <div class="meta">
+                    <h2 class="title">{{ content.title }}</h2>
+
+                    <p class="tag">{{ content.tag }}</p>
+                    <p class="date">{{ content.created_at }}（
+                        <time class="updated_at"
+                              datetime="{{ content.updated_at | date:'Y-m-d' }}">{{ content.updated_at | naturaltime }}に更新
+                        </time>
+                        ）
+                    </p>
+                </div>
+
+            </article>
+        </a>
+    {% empty %}
+        <p class="box">検索結果はありませんでした。</p>
+    {% endfor %}
+    </section>
+{% endblock %}

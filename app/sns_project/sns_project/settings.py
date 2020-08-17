@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'rules.apps.AutodiscoverRulesConfig',
     'bootstrap4',
     'sns_app',
@@ -137,7 +138,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # ログイン遷移の設定
 LOGIN_URL = 'accounts:login'
-LOGIN_REDIRECT_URL = 'top'
+LOGIN_REDIRECT_URL = 'contents:content_list'
 
 # メールをコンソールに表示する. 開発用
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -5,7 +5,7 @@ from .models import Tag, Content, Review
 class ContentAdmin(admin.ModelAdmin):
     search_fields = ('title', 'text')
     list_display = ['title', 'is_public', 'updated_at', 'created_at', 'title_len']
-    list_filter = ['is_public', 'tags']
+    list_filter = ['is_public', 'tag']
     ordering = ('-updated_at',)
 
     def title_len(self, obj):

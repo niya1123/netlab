@@ -1,0 +1,84 @@
+/* ヘッダー下メニュー */
+#menu {
+    margin-bottom: 100px;
+    text-align: center;
+  }
+  
+  #menu a {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* 一覧 レイアウト */
+  @media (min-width: 1024px) {
+    #list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 50px;
+      column-gap: 50px;
+      justify-items: center;
+    }
+  }
+  
+  @media (min-width: 1366px) {
+    #list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  
+  
+  /* 一覧の各ノート */
+  .box {
+    margin-bottom: 100px;
+    display: block;
+  }
+  
+  .box:hover {
+    text-decoration: none;
+  }
+  
+  .box-inner {
+    display: grid;
+    grid-template-rows: auto auto;
+  }
+  
+  
+  .meta {
+    color: #666;
+    text-align: center;
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .title {
+    margin: 1em 0;
+    color: #333;
+  }
+  
+  .category {
+    margin-bottom: .5em;
+  }
+  
+  .mask {
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
+  
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+  
+  .box:hover .mask {
+    opacity: 1;
+  }
+  
+  .caption {
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    border: solid 1px #fff;
+    padding: 0.5em 1em;
+  }

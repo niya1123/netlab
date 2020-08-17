@@ -20,7 +20,7 @@ admin.site.site_header = 'SNSサイト'
 
 urlpatterns = [
     path('accounts/', include('accounts.urls')),
-    path('', include('sns_app.urls')),
+    # path('', include('sns_app.urls')),
     path('admin/', admin.site.urls),
-    path('contents/', include('contents.urls'))
+    path('', include('contents.urls'))
 ]
