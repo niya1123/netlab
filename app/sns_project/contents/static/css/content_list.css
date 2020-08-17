@@ -42,6 +42,27 @@
     grid-template-rows: auto auto;
   }
   
+  .backend {
+    background-color: aqua;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  @media (min-width: 1024px) {
+    .backend {
+      width: 437px;
+      height: 273px;
+      object-fit: cover;
+    }
+  }
+  
+  @media (min-width: 1366px) {
+    .backend {
+      width: 388px;
+      height: 242px;
+    }
+  }
+  
   
   .meta {
     color: #666;

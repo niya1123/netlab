@@ -1,9 +1,5 @@
 {% extends "accounts/base.html" %}
-{% load static %}
 {% load humanize %}
-{% block extrahead %}
-<link rel="stylesheet" type="text/css" href="{% static 'contents/content_list.css' %}">
-{% endblock %}
 {% block content %}
 <div id="menu">
     <h1 class="container">全てのコンテンツ</h1>
@@ -12,6 +8,8 @@
     {% for content in content_list %}
         <a class="box" href="">
             <article class="box-inner">
+
+                <div class="backend"></div>
 
                 <div class="mask">
                     <div class="caption">Read More</div>
