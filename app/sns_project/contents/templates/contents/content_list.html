@@ -6,7 +6,7 @@
 </div>
 <section id="list" class="container">
     {% for content in content_list %}
-        <a class="box" href="">
+        <a class="box" href="{% url 'contents:content_detail' content.pk %}">
             <article class="box-inner">
 
                 <div class="backend">

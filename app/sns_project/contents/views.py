@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -24,3 +25,14 @@ class ContentList(generic.ListView):
     """コンテンツのリスト"""
     model = Content
     template_name = 'contents/content_list.html'
+
+class ContentDetail(generic.DetailView):
+    """コンテンツの詳細画面"""
+    model = Content
+
+    def get_object(self, querset=None):
+        content = super().get_object()
+        if content.is_public or self.request.user.is_authenticated:
+            return content
+        else:
+            raise Http404

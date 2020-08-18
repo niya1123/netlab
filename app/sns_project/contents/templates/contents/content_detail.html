@@ -1,0 +1,25 @@
+{% extends "accounts/base.html" %}
+{% load humanize %}
+
+{% block content %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>タイトル</th>
+            <td>{{ content.title }}</td>
+        </tr>
+        <tr>
+            <th>問題文</th>
+            <td>{{ content.question_text}}</td>
+        </tr>
+        <tr>
+            <th>解説</th>
+            <td>{{ content.question_description }}</td>
+        </tr>
+        <tr>
+            <th>更新日時</th>
+            <td>{{ content.updated_at | naturaltime }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

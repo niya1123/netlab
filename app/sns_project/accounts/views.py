@@ -18,7 +18,7 @@ from django.views import generic
 
 from .forms import (LoginForm, PasswordChangeForm, PasswordResetForm,
                     ProfileUpdateForm, SetPasswordForm, UserCreateForm)
-
+import uuid
 User = get_user_model()
 
 class Login(LoginView):
@@ -55,7 +55,7 @@ class UserCreate(generic.CreateView):
         context = {
             'procotol': self.request.scheme,
             'domain': domain,
-            'token': dumps(user.pk),
+            'token': dumps(str(user.pk)),
             'user': user,
         }
 
