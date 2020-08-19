@@ -33,7 +33,7 @@ class Logout(LogoutView):
     """
     ログアウトページ
     """
-    template_name = 'sns_app/index.html'
+    template_name = 'accounts/logout.html'
 
 class UserCreate(generic.CreateView):
     """
