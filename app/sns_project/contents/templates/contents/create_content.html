@@ -6,10 +6,41 @@
     <div class="form-group">
         <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
         {{ field }}
+        {% if field == form.tag %}
+            <a href="javascript:void(0);" onclick="window.open('{% url 'contents:add_tag' %}','subwin','width=500,height=500');">+</a><br>
+        {% endif %}
+        {% if field == form.choice %}
+            <a href="javascript:void(0);" onclick="window.open('{% url 'contents:add_choice' %}','subwin','width=500,height=500');">+</a><br>
+        {% endif %}
         {{ field.errors }}
     </div>
     {% endfor %}
     {% csrf_token %}
     <button type="submit" class="btn btn-primary btn-lg">送信</button>
 </form>
+<script>
+    function add_tag(name, pk){
+        var select = document.getElementById('id_tag');
+        // <option value="pk">選択肢名</option> をつくる
+        var option = document.createElement('option');
+        option.setAttribute('value', pk);
+        option.innerHTML = name;
+
+        // カテゴリの先頭に追加し、選択済みにする
+        select.add(option,0);
+        select.options[0].selected= true;
+    }
+
+    function add_choice(choice_text, pk){
+        var select = document.getElementById('id_choice');
+        // <option value="pk">選択肢名</option> をつくる
+        var option = document.createElement('option');
+        option.setAttribute('value', pk);
+        option.innerHTML = choice_text;
+
+        // カテゴリの先頭に追加し、選択済みにする
+        select.add(option,0);
+        select.options[0].selected= true;
+    }
+</script>
 {% endblock %}
