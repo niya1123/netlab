@@ -12,6 +12,14 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class Choice(models.Model):
+    """問題の選択肢"""
+    choice_text = models.CharField('選択肢の文', max_length=60)
+    is_answer = models.BooleanField('正解文かどうか', default=False)
+
+    def __str__(self):
+        return self.choice_text
+
 class Content(models.Model):
     """コンテンツモデル"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -19,6 +27,7 @@ class Content(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)
     question_text = models.TextField('問題文')
+    choice =  models.ManyToManyField(Choice, verbose_name='選択肢')
 
     is_public = models.BooleanField('公開する', default=True)
     question_description = models.TextField('問題の説明')
