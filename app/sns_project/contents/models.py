@@ -18,6 +18,7 @@ class Content(models.Model):
     title = models.CharField('タイトル', max_length=50)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)
+    content_text = models.TextField('コンテンツの説明')
     is_public = models.BooleanField('公開する', default=True)
     created_at = models.DateTimeField('作成日', default=timezone.now)
     updated_at = models.DateTimeField('更新日', default=timezone.now)
@@ -33,7 +34,6 @@ class Question(models.Model):
     choice3 = models.CharField(max_length=60, default='')
     choice4 = models.CharField(max_length=60, default='')
     answer = models.CharField(max_length=60, default='')
-    question_description = models.TextField('問題の説明')
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
 
     def __str__(self):
