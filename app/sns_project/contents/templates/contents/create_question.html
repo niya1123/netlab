@@ -1,0 +1,15 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-primary" type="submit" value="登録">
+</form>
+{% else %}
+<a href="{% url 'accounts:login' %}">ログインが必要です</a>
+{{user}}
+{{content.author}}
+{% endif %}
+{% endblock %}

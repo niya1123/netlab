@@ -18,7 +18,7 @@ class Content(models.Model):
     title = models.CharField('タイトル', max_length=50)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)
-    content_text = models.TextField('コンテンツの説明')
+    content_text = models.TextField('説明文')
     is_public = models.BooleanField('公開する', default=True)
     created_at = models.DateTimeField('作成日', default=timezone.now)
     updated_at = models.DateTimeField('更新日', default=timezone.now)
