@@ -9,8 +9,8 @@
         {% if field == form.tag %}
             <a href="javascript:void(0);" onclick="window.open('{% url 'contents:add_tag' %}','subwin','width=500,height=500');">+</a><br>
         {% endif %}
-        {% if field == form.choice %}
-            <a href="javascript:void(0);" onclick="window.open('{% url 'contents:add_choice' %}','subwin','width=500,height=500');">+</a><br>
+        {% if field == form.question %}
+            <a href="javascript:void(0);" onclick="window.open('{% url 'contents:add_question' %}','subwin','width=500,height=500');">+</a><br>
         {% endif %}
         {{ field.errors }}
     </div>
@@ -31,12 +31,12 @@
         select.options[0].selected= true;
     }
 
-    function add_choice(choice_text, pk){
-        var select = document.getElementById('id_choice');
+    function add_question(question_text, pk){
+        var select = document.getElementById('id_question');
         // <option value="pk">選択肢名</option> をつくる
         var option = document.createElement('option');
         option.setAttribute('value', pk);
-        option.innerHTML = choice_text;
+        option.innerHTML = question_text;
 
         // カテゴリの先頭に追加し、選択済みにする
         select.add(option,0);

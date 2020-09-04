@@ -12,30 +12,32 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-class Choice(models.Model):
-    """問題の選択肢"""
-    choice_text = models.CharField('選択肢の文', max_length=60)
-    is_answer = models.BooleanField('正解文かどうか', default=False)
-
-    def __str__(self):
-        return self.choice_text
-
 class Content(models.Model):
     """コンテンツモデル"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField('タイトル', max_length=50)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)
-    question_text = models.TextField('問題文')
-    choice =  models.ManyToManyField(Choice, verbose_name='選択肢')
-
     is_public = models.BooleanField('公開する', default=True)
-    question_description = models.TextField('問題の説明')
     created_at = models.DateTimeField('作成日', default=timezone.now)
     updated_at = models.DateTimeField('更新日', default=timezone.now)
 
     def __str__(self):
         return self.title
+
+class Question(models.Model):
+    """問題モデル"""
+    question_text = models.TextField('問題文')
+    choice1 = models.CharField(max_length=60, default='')
+    choice2 = models.CharField(max_length=60, default='')
+    choice3 = models.CharField(max_length=60, default='')
+    choice4 = models.CharField(max_length=60, default='')
+    answer = models.CharField(max_length=60, default='')
+    question_description = models.TextField('問題の説明')
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.question_text
 
 class Review(models.Model):
     """評価"""

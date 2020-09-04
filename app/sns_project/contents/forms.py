@@ -6,9 +6,7 @@ class CreateContentForm(forms.ModelForm):
 
     class Meta:
         model = Content
-        fields = ('title', 'tag', 'question_text', 'choice',
-                  'is_public', 'question_description', 
-        )
+        fields = ('title', 'tag', 'is_public')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

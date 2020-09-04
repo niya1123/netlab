@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import CreateContentForm
-from .models import Choice, Content, Tag
+from .models import Question, Content, Tag
 
 
 class CreateContent(LoginRequiredMixin, generic.edit.CreateView):
@@ -44,9 +44,9 @@ class CreateTag(generic.CreateView):
     fields = '__all__'
     success_url = reverse_lazy('contents:content_list')
 
-class CreateChoice(generic.CreateView):
+class CreateQuestion(generic.CreateView):
     """選択肢の作成"""
-    model = Choice
+    model = Question
     fields = '__all__'
     success_url = reverse_lazy('contents:content_list')
 
@@ -62,14 +62,14 @@ class AddTag(CreateTag):
         }
         return render(self.request, 'contents/close.html', context)
 
-class AddChoice(CreateChoice):
+class AddQuestion(CreateQuestion):
     """選択肢を新規に登録する"""
     
     def form_valid(self, form):
-        choice = form.save()
+        question = form.save()
         context = {
-            'object_name': str(choice),
-            'object_pk': choice.pk,
-            'function_name': 'add_choice'
+            'object_name': str(question),
+            'object_pk': question.pk,
+            'function_name': 'add_question'
         }
         return render(self.request, 'contents/close.html', context)
