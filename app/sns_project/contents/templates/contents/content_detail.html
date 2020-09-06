@@ -18,4 +18,7 @@
         </tr>
     </tbody>
 </table>
+{% if content.author == user %}
+<a href="{% url 'contents:add_question' content.pk %}" style="text-align: right">問題作成はこちら</a>
+{% endif %}
 {% endblock %}
