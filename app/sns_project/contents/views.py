@@ -38,6 +38,11 @@ class ContentDetail(generic.DetailView):
         else:
             raise Http404
 
+class QuestionList(generic.ListView):
+    """問題のリスト"""
+    model = Question
+    template_name = 'contents/question_list.html'
+
 class CreateTag(generic.CreateView):
     """タグ作成"""
     model = Tag
