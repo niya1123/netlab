@@ -1,33 +1,10 @@
 {% extends "accounts/base.html" %}
 {% block content %}
 <section id="list" class="container">
-    {% for content in content_list %}
-        {% if content.is_public %}
-        <a class="box" href="{% url 'contents:content_detail' content.pk %}">
-            <article class="box-inner">
-
-                <div class="backend">
-
-                    <!-- <div class="mask">
-                        <div class="caption">Read More</div>
-                    </div> -->
-                    
-                        <div class="meta">
-                            <h2 class="title">{{ content.title }}</h2>
-
-                            <p class="author">作成者: {{ content.author }}</p>
-                            <p class="date">{{ content.created_at }}（
-                                <time class="updated_at"
-                                    datetime="{{ content.updated_at | date:'Y-m-d' }}">{{ content.updated_at | naturaltime }}に更新
-                                </time>
-                                ）
-                            </p>
-                        </div>
-
-                </div>
-            </article>
-        </a>
-        {% endif %}
+    {% for question in question_list %}
+        {{question}}
+        
+        
         {% empty %}
         <p class="box">検索結果はありませんでした。</p>
     {% endfor %}
