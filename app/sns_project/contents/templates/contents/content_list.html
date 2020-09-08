@@ -1,9 +1,13 @@
 {% extends "accounts/base.html" %}
 {% load humanize %}
 {% block content %}
-<div id="menu">
-    <h1 class="container">全てのコンテンツ</h1>
-</div>
+<form id="search-form" action="" method="GET">
+    {{ search_form.key_word }}
+    <button type="submit" id="search-button">検索</button>
+    <div class="inline-checkbox">
+        {{ search_form.tag }}
+    </div>
+</form>
 <section id="list" class="container">
     {% for content in content_list %}
         {% if content.is_public %}

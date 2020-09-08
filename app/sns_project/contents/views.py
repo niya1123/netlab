@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from .forms import CreateContentForm
+from .forms import ContentSearchForm, CreateContentForm
 from .models import Content, Question, Tag
 
 
@@ -26,6 +27,31 @@ class ContentList(generic.ListView):
     """コンテンツのリスト"""
     model = Content
     template_name = 'contents/content_list.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.form = form = ContentSearchForm(self.request.GET or None)
+        if form.is_valid():
+            # 選択したタグが含まれた記事
+            tag = form.cleaned_data.get('tag')
+            if tag:
+                for t in tag:
+                    queryset = queryset.filter(tag=t)
+
+            # タイトルか本文にキーワードが含まれたもの
+            # キーワードが半角スペースで区切られていれば、その回数だけfilterする。つまりAND。
+            key_word = form.cleaned_data.get('key_word')
+            if key_word:
+                for word in key_word.split():
+                    queryset = queryset.filter(Q(title__icontains=word) | Q(text__icontains=word))
+
+        queryset = queryset.order_by('-updated_at').prefetch_related('tag')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_form'] = ContentSearchForm(self.request.GET or None)
+        return context
 
 class ContentDetail(generic.DetailView):
     """コンテンツの詳細画面"""

@@ -8,6 +8,11 @@
     color: #333;
     font-weight: bold;
   }
+
+  /* 検索フォーム */
+#search-form {
+  margin-bottom: 48px;
+}
   
   /* 一覧 レイアウト */
   @media (min-width: 1024px) {
