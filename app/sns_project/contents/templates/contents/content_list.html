@@ -8,6 +8,18 @@
         {{ search_form.tag }}
     </div>
 </form>
+<script>
+    document.addEventListener('DOMContentLoaded', e => {
+
+        const searchForm = document.getElementById('search-form');
+
+        for (const check of document.getElementsByName('tag')) {
+            check.addEventListener('change', () => {
+                searchForm.submit();
+            });
+        }
+    });
+</script>
 <section id="list" class="container">
     {% for content in content_list %}
         {% if content.is_public %}

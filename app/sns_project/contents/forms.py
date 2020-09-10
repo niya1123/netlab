@@ -1,5 +1,8 @@
 from django import forms
-from .models import Content, Tag, Question
+
+from .models import Content, Question, Tag
+from .widgets import CustomCheckboxSelectMultiple
+
 
 class CreateContentForm(forms.ModelForm):
     """コンテンツ作成フォーム"""
@@ -36,4 +39,5 @@ class ContentSearchForm(forms.Form):
         label='タグでの絞り込み',
         required=False,
         queryset=Tag.objects.order_by('name'),
+        widget=CustomCheckboxSelectMultiple,
     )
