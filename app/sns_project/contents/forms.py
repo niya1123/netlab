@@ -1,5 +1,5 @@
 from django import forms
-from .models import Content, Tag
+from .models import Content, Tag, Question
 
 class CreateContentForm(forms.ModelForm):
     """コンテンツ作成フォーム"""
@@ -8,6 +8,18 @@ class CreateContentForm(forms.ModelForm):
         model = Content
         fields = ('title', 'tag', 'content_text', 'is_public')
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+class CreateQuestionForm(forms.ModelForm):
+    """クイズ作成フォーム"""
+
+    class Meta:
+        model = Question
+        fields = ('question_text', 'choice1', 'choice2', 'choice3', 'choice4',
+              'answer')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

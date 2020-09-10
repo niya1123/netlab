@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from .forms import ContentSearchForm, CreateContentForm
+from .forms import ContentSearchForm, CreateContentForm, CreateQuestionForm
 from .models import Content, Question, Tag
 
 
@@ -77,9 +77,7 @@ class CreateTag(generic.CreateView):
 
 class CreateQuestion(generic.CreateView):
     """選択肢の作成"""
-    model = Question
-    fields = ('question_text', 'choice1', 'choice2', 'choice3', 'choice4',
-              'answer')
+    form_class = CreateQuestionForm
     template_name = 'contents/create_question.html'
 
     def form_valid(self, form):
