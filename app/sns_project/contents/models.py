@@ -29,11 +29,17 @@ class Content(models.Model):
 class Question(models.Model):
     """問題モデル"""
     question_text = models.TextField('問題文')
-    choice1 = models.CharField(max_length=60, default='')
-    choice2 = models.CharField(max_length=60, default='')
-    choice3 = models.CharField(max_length=60, default='')
-    choice4 = models.CharField(max_length=60, default='')
-    answer = models.CharField(max_length=60, default='')
+    choice1 = models.CharField('選択肢1', max_length=60, default='')
+    choice2 = models.CharField('選択肢2', max_length=60, default='')
+    choice3 = models.CharField('選択肢3', max_length=60, default='')
+    choice4 = models.CharField('選択肢4', max_length=60, default='')
+    CHOICES = (
+        ('1', '選択肢1'),
+        ('2', '選択肢2'),
+        ('3', '選択肢3'),
+        ('4', '選択肢4'),
+    )
+    answer = models.CharField('答え', max_length=60, choices=CHOICES, blank=True)
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
 
     def __str__(self):
