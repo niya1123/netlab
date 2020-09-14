@@ -2,11 +2,12 @@
 {% block content %}
 <section id="list" class="container">
     {% for question in question_list %}
-        {{question}}
-        
+        {% if question.content.id == content_pk %}
+        問題: {{question}}
+        {% endif %}
         
         {% empty %}
-        <p class="box">検索結果はありませんでした。</p>
+        <p class="box">このコンテンツに問題はありません。</p>
     {% endfor %}
     </section>
 {% endblock %}

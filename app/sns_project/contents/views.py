@@ -69,6 +69,11 @@ class QuestionList(generic.ListView):
     model = Question
     template_name = 'contents/question_list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['content_pk'] = self.kwargs.get('pk')
+        return context
+
 class CreateTag(generic.CreateView):
     """タグ作成"""
     model = Tag
