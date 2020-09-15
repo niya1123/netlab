@@ -10,7 +10,11 @@
         </tr>
         <tr>
             <th>解説</th>
+            {% if 'iframe' in content.content_text %}
             <td>{{ content.content_text | safe | linebreaksbr}}</td>
+            {% else %}
+            <td>{{ content.content_text | linebreaksbr}}</td>
+            {% endif %}
         </tr>
         <tr>
             <th>更新日時</th>
