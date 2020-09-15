@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <th>解説</th>
-            <td>{{ content.content_text | linebreaksbr}}</td>
+            <td>{{ content.content_text | safe | linebreaksbr}}</td>
         </tr>
         <tr>
             <th>更新日時</th>
