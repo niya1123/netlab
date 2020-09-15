@@ -28,6 +28,7 @@ class Content(models.Model):
 
 class Question(models.Model):
     """問題モデル"""
+    question_title = models.CharField('問題のタイトル', max_length=50)
     question_text = models.TextField('問題文')
     choice1 = models.CharField('選択肢1', max_length=60, default='')
     choice2 = models.CharField('選択肢2', max_length=60, default='')
@@ -43,7 +44,7 @@ class Question(models.Model):
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.question_text
+        return self.question_title
 
 class Review(models.Model):
     """評価"""

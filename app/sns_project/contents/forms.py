@@ -21,7 +21,7 @@ class CreateQuestionForm(forms.ModelForm):
 
     class Meta:
         model = Question
-        fields = ('question_text', 'choice1', 'choice2', 'choice3', 'choice4',
+        fields = ('question_title', 'question_text', 'choice1', 'choice2', 'choice3', 'choice4',
               'answer')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
