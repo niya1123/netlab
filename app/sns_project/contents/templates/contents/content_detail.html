@@ -2,23 +2,25 @@
 {% load humanize %}
 
 {% block content %}
+<style>
+    h1{
+        text-align: center;
+    }
+</style>
 <table class="table">
     <tbody>
         <tr>
-            <th>タイトル</th>
-            <td>{{ content.title }}</td>
+            <td><h1>{{ content.title }}</h1></td>
         </tr>
         <tr>
-            <th>解説</th>
-            {% if 'iframe' in content.content_text %}
-            <td>{{ content.content_text | safe | linebreaksbr}}</td>
-            {% else %}
+            {% if '<script' in content.content_text %}
             <td>{{ content.content_text | linebreaksbr}}</td>
+            {% else %}
+            <td>{{ content.content_text | safe | linebreaksbr}}</td>
             {% endif %}
         </tr>
         <tr>
-            <th>更新日時</th>
-            <td>{{ content.updated_at | naturaltime }}</td>
+            <td>更新日時: {{ content.updated_at | naturaltime }}</td>
         </tr>
     </tbody>
 </table>
