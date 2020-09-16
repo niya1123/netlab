@@ -32,7 +32,7 @@
 }
   
   
-/* 一覧の各ノート */
+/* 一覧の各コンテンツ */
 .box {
   margin-bottom: 100px;
   display: block;
@@ -66,6 +66,14 @@
     width: 388px;
     height: 242px;
   }
+}
+
+.title{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis; /* Safari */
+	-o-text-overflow: ellipsis; /* Opera */
 }
   
   
