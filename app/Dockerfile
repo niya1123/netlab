@@ -10,12 +10,12 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Pythonが標準入出力をバッファリングすることを防ぐ
 ENV PYTHONUNBUFFERED 1
 
-# psycopg2のインストールの準備
+# psycopg2とpillowのインストールの準備
 RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add --virtual build-deps gcc python3-dev musl-dev jpeg-dev zlib-dev libjpeg\
     && apk add postgresql-dev
     
-# Pipenvをインストール
+# pipのアプデ
 RUN pip install --upgrade pip 
 
 # ホストのrequirements.txtをコンテナの作業ディレクトリにコピー

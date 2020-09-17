@@ -22,5 +22,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     # path('', include('sns_app.urls')),
     path('admin/', admin.site.urls),
-    path('', include('contents.urls'))
+    path('', include('contents.urls')),
+    path('markdownx/', include('markdownx.urls')),
 ]

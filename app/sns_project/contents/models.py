@@ -2,6 +2,8 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
 
 class Tag(models.Model):
     """
@@ -18,13 +20,16 @@ class Content(models.Model):
     title = models.CharField('タイトル', max_length=50)
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='タグ', blank=True)
-    content_text = models.TextField('説明文', help_text='htmlタグが使用可能です.')
+    content_text = MarkdownxField('説明文', help_text='MarkDown形式で記入可能です. ')
     is_public = models.BooleanField('公開する', default=True)
     created_at = models.DateTimeField('作成日', default=timezone.now)
     updated_at = models.DateTimeField('更新日', default=timezone.now)
 
     def __str__(self):
         return self.title
+
+    def formatted_markdown(self):
+        return markdownify(self.content_text)
 
 class Question(models.Model):
     """問題モデル"""

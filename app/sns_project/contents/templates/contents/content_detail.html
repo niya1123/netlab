@@ -14,9 +14,9 @@
         </tr>
         <tr>
             {% if '<script' in content.content_text %}
-            <td>{{ content.content_text | linebreaksbr}}</td>
+            <td>{{ content.formatted_markdown | linebreaksbr}}</td>
             {% else %}
-            <td>{{ content.content_text | safe | linebreaksbr}}</td>
+            <td>{{ content.formatted_markdown | safe | linebreaksbr}}</td>
             {% endif %}
         </tr>
         <tr>

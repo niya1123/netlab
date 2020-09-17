@@ -4,3 +4,4 @@ gunicorn==20.0.4
 rules
 django-bootstrap4
 django-filter
+django-markdownx
