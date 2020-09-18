@@ -43,7 +43,7 @@ class ContentList(generic.ListView):
             key_word = form.cleaned_data.get('key_word')
             if key_word:
                 for word in key_word.split():
-                    queryset = queryset.filter(Q(title__icontains=word) | Q(text__icontains=word))
+                    queryset = queryset.filter(Q(title__icontains=word) | Q(content_text__icontains=word))
 
         queryset = queryset.order_by('-updated_at').prefetch_related('tag')
         return queryset

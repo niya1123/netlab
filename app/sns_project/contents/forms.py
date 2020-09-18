@@ -30,7 +30,7 @@ class CreateQuestionForm(forms.ModelForm):
 
 class ContentSearchForm(forms.Form):
     """コンテンツ検索フォーム"""
-    keyword = forms.CharField(
+    key_word = forms.CharField(
         label='検索ワード',
         required=False,
     )
