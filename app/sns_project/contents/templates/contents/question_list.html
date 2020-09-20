@@ -4,6 +4,8 @@
     {% for question in question_list %}
         {% if question.content.id == content_pk %}
         問題: {{question}}
+        {% else %}
+        <p class="box">このコンテンツに問題はありません。</p>
         {% endif %}
         
         {% empty %}
