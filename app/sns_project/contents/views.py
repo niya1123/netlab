@@ -74,6 +74,12 @@ class QuestionList(generic.ListView):
         context['content_pk'] = self.kwargs.get('pk')
         return context
 
+class QuestionDetail(generic.DetailView):
+    """問題の詳細"""
+    model = Question
+    template_name = 'contents/question_detail.html'
+
+
 class CreateTag(generic.CreateView):
     """タグ作成"""
     model = Tag
