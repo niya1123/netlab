@@ -1,3 +1,4 @@
 .env
 .env.db
 app/sns_project/sns_app/management/commands/custom_createsuperuser.py
+app/sns_project/sns_project/settings.py
