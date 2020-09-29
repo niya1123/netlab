@@ -8,10 +8,12 @@
 <table class="table">
     <tbody>
         <tr>
-            <td><h1>{{ question.question_title }}</h1></td>
+            <h1>{{ question.question_title }}</h1>
         </tr>
         <tr>
-            <td>{{question.question_text}}</td>
+            {{question.question_text}}
+            <br>
+            <input type=radio name="choice">{{question.choice1}}
         </tr>
     </tbody>
 </table>
