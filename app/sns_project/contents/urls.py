@@ -5,6 +5,7 @@ from . import views
 app_name = 'contents'
 
 urlpatterns = [
+    path('content/<uuid:pk>/content/list', views.MyContentList.as_view(), name="my_content_list"),
     path('content/detail/<uuid:content_pk>/question/list/<int:pk>/detail', views.QuestionDetail.as_view(), name="question_detail"),
     path('content/detail/<uuid:pk>/question/list', views.QuestionList.as_view(), name="question_list"),
     path('content/detail/<uuid:pk>/question/new', views.CreateQuestion.as_view(), name="add_question"),

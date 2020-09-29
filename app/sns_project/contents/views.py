@@ -53,6 +53,11 @@ class ContentList(generic.ListView):
         context['search_form'] = ContentSearchForm(self.request.GET or None)
         return context
 
+class MyContentList(generic.ListView):
+    """自分のコンテンツのリスト"""
+    model = Content
+    template_name = 'contents/my_content_list.html'
+
 class ContentDetail(generic.DetailView):
     """コンテンツの詳細画面"""
     model = Content

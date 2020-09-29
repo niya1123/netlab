@@ -43,7 +43,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'contents:create_content' %}">コンテンツ作成</a>
-                <a class="dropdown-item" href="#">コンテンツ一覧</a>
+                <a class="dropdown-item" href="{% url 'contents:my_content_list' user.pk %}">コンテンツ一覧</a>
                 <a class="dropdown-item" href="#">コンテンツ修正</a>
               </div>
             </li>
