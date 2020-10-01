@@ -4,7 +4,7 @@
 <section id="list" class="container">
     {% for content in content_list %}
         {% if content.author.id == user.pk %}
-        <a class="box" href="{% url 'contents:content_detail' content.pk %}">
+        <a class="box" href="{% url 'contents:my_content_update' content.pk %}">
             <article class="box-inner">
 
                 <div class="backend">

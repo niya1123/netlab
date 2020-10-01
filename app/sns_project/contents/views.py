@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import Http404
-from django.shortcuts import get_list_or_404, get_object_or_404, render
+from django.shortcuts import get_list_or_404, get_object_or_404, render, resolve_url
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from .forms import ContentSearchForm, CreateContentForm, CreateQuestionForm
+from .forms import ContentSearchForm, CreateContentForm, CreateQuestionForm, MyContentUpdateForm
 from .models import Content, Question, Tag
 
 
@@ -57,6 +57,15 @@ class MyContentList(generic.ListView):
     """自分のコンテンツのリスト"""
     model = Content
     template_name = 'contents/my_content_list.html'
+
+class MyContentUpdate(generic.UpdateView):
+    """自分のコンテンツの修正"""
+    model = Content
+    form_class = MyContentUpdateForm
+    template_name = 'contents/my_content_update.html'
+
+    def get_success_url(self):
+        return resolve_url('contents:my_content_list', pk=self.kwargs['pk'])
 
 class ContentDetail(generic.DetailView):
     """コンテンツの詳細画面"""

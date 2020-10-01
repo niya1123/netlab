@@ -41,3 +41,14 @@ class ContentSearchForm(forms.Form):
         queryset=Tag.objects.order_by('name'),
         widget=CustomCheckboxSelectMultiple,
     )
+
+class MyContentUpdateForm(forms.ModelForm):
+    """自分のコンテンツ変更のフォーム"""
+    class Meta:
+        model = Content
+        fields = ('title', 'tag', 'content_text', 'is_public')
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
