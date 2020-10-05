@@ -1,19 +1,24 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        PermissionRequiredMixin)
 from django.db.models import Q
 from django.http import Http404
-from django.shortcuts import get_list_or_404, get_object_or_404, render, resolve_url
+from django.shortcuts import (get_list_or_404, get_object_or_404, render,
+                              resolve_url)
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from .forms import ContentSearchForm, CreateContentForm, CreateQuestionForm, MyContentUpdateForm
+from .forms import (ContentSearchForm, CreateContentForm, CreateQuestionForm,
+                    MyContentUpdateForm)
 from .models import Content, Question, Tag
 
 
-class CreateContent(LoginRequiredMixin, generic.edit.CreateView):
+class CreateContent(PermissionRequiredMixin, LoginRequiredMixin, generic.edit.CreateView):
     """コンテンツ作成ビュー"""
     form_class = CreateContentForm
     template_name = 'contents/create_content.html'
     success_url = reverse_lazy('contents:create_content_done')
+    permission_required = ('contents.add_content')
+    raise_exception = False
 
     def form_valid(self, form):
         form.instance.author = self.request.user
