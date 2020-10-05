@@ -88,6 +88,20 @@ class MyContentDeleteDone(generic.TemplateView):
     """削除完了画面"""
     template_name = 'contents/my_content_delete_done.html'
 
+class MyQuestionList(LoginRequiredMixin, generic.ListView):
+    """自分の問題リスト"""
+    model = Question
+    template_name = 'contents/my_question_list.html'
+
+class MyQuestionUpdate(LoginRequiredMixin, generic.UpdateView):
+    """自分のコンテンツの修正"""
+    model = Question
+    form_class = CreateQuestionForm
+    template_name = 'contents/my_question_update.html'
+
+    def get_success_url(self):
+        return resolve_url('contents:my_question_list', pk=self.request.user.pk)
+
 class ContentDetail(generic.DetailView):
     """コンテンツの詳細画面"""
     model = Content

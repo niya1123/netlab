@@ -45,6 +45,7 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'contents:create_content' %}">コンテンツ作成</a>
                 <a class="dropdown-item" href="{% url 'contents:my_content_list' user.pk %}">コンテンツ修正</a>
+                <a class="dropdown-item" href="{% url 'contents:my_question_list' user.pk %}">問題修正</a>
               </div>
             </li>
           </li>

@@ -5,6 +5,8 @@ from . import views
 app_name = 'contents'
 
 urlpatterns = [
+    path('content/question/<int:pk>/update', views.MyQuestionUpdate.as_view(), name="my_question_update"),
+    path('content/<uuid:pk>/question/list', views.MyQuestionList.as_view(), name="my_question_list"),
     path('content/delete/done', views.MyContentDeleteDone.as_view(), name='my_content_delete_done'),
     path('content/<uuid:pk>/delete', views.MyContentDelete.as_view(), name='my_content_delete'),
     path('content/<uuid:pk>/update', views.MyContentUpdate.as_view(), name='my_content_update'),
