@@ -17,7 +17,7 @@ class CreateContent(PermissionRequiredMixin, LoginRequiredMixin, generic.edit.Cr
     form_class = CreateContentForm
     template_name = 'contents/create_content.html'
     success_url = reverse_lazy('contents:create_content_done')
-    permission_required = ('contents.add_content')
+    permission_required = ('contents.add_content') # アプリ名.(add | delete | change )_モデル名
     raise_exception = False
 
     def form_valid(self, form):
@@ -58,12 +58,12 @@ class ContentList(generic.ListView):
         context['search_form'] = ContentSearchForm(self.request.GET or None)
         return context
 
-class MyContentList(generic.ListView):
+class MyContentList(LoginRequiredMixin, generic.ListView):
     """自分のコンテンツのリスト"""
     model = Content
     template_name = 'contents/my_content_list.html'
 
-class MyContentUpdate(generic.UpdateView):
+class MyContentUpdate(LoginRequiredMixin, generic.UpdateView):
     """自分のコンテンツの修正"""
     model = Content
     form_class = MyContentUpdateForm
@@ -71,6 +71,15 @@ class MyContentUpdate(generic.UpdateView):
 
     def get_success_url(self):
         return resolve_url('contents:my_content_list', pk=self.kwargs['pk'])
+
+# class MyContentDelete(LoginRequiredMixin, generic.DeleteView):
+#     """自分のコンテンツの削除"""
+#     model = Content
+#     form_class = CreateContentForm
+#     template_name = 'contents/my_content_delete.html'
+    
+#     def get_success_url(self):
+#         return resolve_url('contents:my_content_list', pk=self.kwargs['pk'])
 
 class ContentDetail(generic.DetailView):
     """コンテンツの詳細画面"""
@@ -99,13 +108,13 @@ class QuestionDetail(generic.DetailView):
     template_name = 'contents/question_detail.html'
 
 
-class CreateTag(generic.CreateView):
+class CreateTag(LoginRequiredMixin, generic.CreateView):
     """タグ作成"""
     model = Tag
     fields = '__all__'
     success_url = reverse_lazy('contents:content_list')
 
-class CreateQuestion(generic.CreateView):
+class CreateQuestion(LoginRequiredMixin, generic.CreateView):
     """選択肢の作成"""
     form_class = CreateQuestionForm
     template_name = 'contents/create_question.html'
@@ -118,7 +127,7 @@ class CreateQuestion(generic.CreateView):
     def get_success_url(self):
         return reverse('contents:content_detail', kwargs={'pk': self.kwargs.get('pk')})
 
-class AddTag(CreateTag):
+class AddTag(LoginRequiredMixin, CreateTag):
     """タグを新規に登録する"""
 
     def form_valid(self, form):
@@ -130,7 +139,7 @@ class AddTag(CreateTag):
         }
         return render(self.request, 'contents/close.html', context)
 
-class AddQuestion(CreateQuestion):
+class AddQuestion(LoginRequiredMixin, CreateQuestion):
     """選択肢を新規に登録する"""
     
     def form_valid(self, form):
