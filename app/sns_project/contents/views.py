@@ -72,14 +72,21 @@ class MyContentUpdate(LoginRequiredMixin, generic.UpdateView):
     def get_success_url(self):
         return resolve_url('contents:my_content_list', pk=self.kwargs['pk'])
 
-# class MyContentDelete(LoginRequiredMixin, generic.DeleteView):
-#     """自分のコンテンツの削除"""
-#     model = Content
-#     form_class = CreateContentForm
-#     template_name = 'contents/my_content_delete.html'
-    
-#     def get_success_url(self):
-#         return resolve_url('contents:my_content_list', pk=self.kwargs['pk'])
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['content_pk'] = self.kwargs.get('pk')
+        return context
+
+class MyContentDelete(generic.DeleteView):
+    """自分のコンテンツの削除"""
+    model = Content
+    form_class = CreateContentForm
+    template_name = 'contents/my_content_delete.html'
+    success_url = reverse_lazy('contents:my_content_delete_done')
+
+class MyContentDeleteDone(generic.TemplateView):
+    """削除完了画面"""
+    template_name = 'contents/my_content_delete_done.html'
 
 class ContentDetail(generic.DetailView):
     """コンテンツの詳細画面"""
@@ -127,7 +134,7 @@ class CreateQuestion(LoginRequiredMixin, generic.CreateView):
     def get_success_url(self):
         return reverse('contents:content_detail', kwargs={'pk': self.kwargs.get('pk')})
 
-class AddTag(LoginRequiredMixin, CreateTag):
+class AddTag(CreateTag):
     """タグを新規に登録する"""
 
     def form_valid(self, form):
@@ -139,7 +146,7 @@ class AddTag(LoginRequiredMixin, CreateTag):
         }
         return render(self.request, 'contents/close.html', context)
 
-class AddQuestion(LoginRequiredMixin, CreateQuestion):
+class AddQuestion(CreateQuestion):
     """選択肢を新規に登録する"""
     
     def form_valid(self, form):

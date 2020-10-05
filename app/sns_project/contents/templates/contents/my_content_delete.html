@@ -2,7 +2,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    <p>{{content}}を削除しますか？</p>
-    <input type="submit" value="削除する">
+    <p>{{object}}を削除しますか？</p>
+    <input type="submit" class="btn btn-danger btn-lg" value="削除する">
 </form>
 {% endblock %}
