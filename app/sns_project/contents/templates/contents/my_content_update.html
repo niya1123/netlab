@@ -13,7 +13,8 @@
     </div>
     {% endfor %}
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary btn-lg">更新</button>
+    <button type="submit" class="btn btn-danger btn-lg float-right">削除</button>
+    <button type="submit" class="btn btn-primary btn-lg float-right">更新</button>
 </form>
 <script>
     function add_tag(name, pk){
