@@ -3,7 +3,7 @@
 <section id="list" class="container">
     {% for question in question_list %}
         {% if question.content.author.id == user.pk %}
-        <a href="{% url 'contents:my_question_update' question.id %}">{{question.question_title}}</a>
+        <a href="{% url 'contents:my_question_update' question.pk %}">{{question.question_title}}</a>
         {% else %}
         <p class="box">自分で作成した問題はありません。</p>
         {% endif %}

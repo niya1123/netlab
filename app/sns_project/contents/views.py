@@ -85,7 +85,7 @@ class MyContentDelete(generic.DeleteView):
     success_url = reverse_lazy('contents:my_content_delete_done')
 
 class MyContentDeleteDone(generic.TemplateView):
-    """削除完了画面"""
+    """コンテンツ削除完了画面"""
     template_name = 'contents/my_content_delete_done.html'
 
 class MyQuestionList(LoginRequiredMixin, generic.ListView):
@@ -94,13 +94,24 @@ class MyQuestionList(LoginRequiredMixin, generic.ListView):
     template_name = 'contents/my_question_list.html'
 
 class MyQuestionUpdate(LoginRequiredMixin, generic.UpdateView):
-    """自分のコンテンツの修正"""
+    """自分の問題の修正"""
     model = Question
     form_class = CreateQuestionForm
     template_name = 'contents/my_question_update.html'
 
     def get_success_url(self):
         return resolve_url('contents:my_question_list', pk=self.request.user.pk)
+
+class MyQuestionDelete(generic.DeleteView):
+    """自分の問題削除"""
+    model = Question
+    form_class = CreateQuestionForm
+    template_name = 'contents/my_question_delete.html'
+    success_url = reverse_lazy('contents:my_question_delete_done')
+
+class MyQuestionDeleteDone(generic.TemplateView):
+    """問題削除完了画面"""
+    template_name = 'contents/my_question_delete_done.html'
 
 class ContentDetail(generic.DetailView):
     """コンテンツの詳細画面"""

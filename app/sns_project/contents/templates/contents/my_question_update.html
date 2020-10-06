@@ -11,7 +11,8 @@
     </div>
     {% endfor %}
     {% csrf_token %}
-    <input class="btn btn-primary" type="submit" value="修正">
+    <a class="btn btn-danger btn-lg float-right" href="{% url 'contents:my_question_delete' question.pk %}" >削除</a>
+    <input class="btn btn-primary btn-lg float-right" type="submit" value="修正">
 </form>
 {% endif %}
 {% endblock %}
