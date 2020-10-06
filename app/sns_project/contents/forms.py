@@ -19,10 +19,18 @@ class CreateContentForm(forms.ModelForm):
 class CreateQuestionForm(forms.ModelForm):
     """クイズ作成フォーム"""
 
+    CHOICES = (
+        ('1', '選択肢1'),
+        ('2', '選択肢2'),
+        ('3', '選択肢3'),
+        ('4', '選択肢4'),
+    )
+    answer = forms.MultipleChoiceField(label="答え", choices=CHOICES, widget=forms.CheckboxSelectMultiple())
+
     class Meta:
         model = Question
-        fields = ('question_title', 'question_text', 'choice1', 'choice2', 'choice3', 'choice4',
-              'answer')
+        fields = ('question_title', 'question_text', 'choice1', 'choice2', 'choice3', 'choice4',)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
