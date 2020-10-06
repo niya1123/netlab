@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED 1
 
 # psycopg2とpillowのインストールの準備
 RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev jpeg-dev zlib-dev libjpeg\
+    && apk add --virtual build-deps gcc python3-dev musl-dev jpeg-dev zlib-dev libjpeg docker\
     && apk add postgresql-dev
     
 # pipのアプデ
