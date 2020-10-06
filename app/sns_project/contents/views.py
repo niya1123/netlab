@@ -147,7 +147,7 @@ class CreateTag(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy('contents:content_list')
 
 class CreateQuestion(LoginRequiredMixin, generic.CreateView):
-    """選択肢の作成"""
+    """問題の作成"""
     form_class = CreateQuestionForm
     template_name = 'contents/create_question.html'
 

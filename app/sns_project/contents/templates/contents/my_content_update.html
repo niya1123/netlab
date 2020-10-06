@@ -15,6 +15,7 @@
     {% csrf_token %}
     <a class="btn btn-danger btn-lg float-right" href="{% url 'contents:my_content_delete' content_pk %}" >削除</a>
     <button type="submit" class="btn btn-primary btn-lg float-right">更新</button>
+    <a class="btn btn-primary btn-lg float-left" href="{% url 'contents:add_question' content_pk %}">問題作成</a>
 </form>
 <script>
     function add_tag(name, pk){
