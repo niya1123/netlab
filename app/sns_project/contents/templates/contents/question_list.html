@@ -1,15 +1,11 @@
 {% extends "accounts/base.html" %}
 {% block content %}
-<section id="list" class="container">
-    {% for question in question_list %}
-        {% if question.content.id == content_pk %}
-        <a href="{% url 'contents:question_detail' content_pk question.id %}">{{question.question_title}}</a>
-        {% else %}
-        <p class="box">このコンテンツに問題はありません。</p>
-        {% endif %}
-        
-        {% empty %}
-        <p class="box">このコンテンツに問題はありません。</p>
-    {% endfor %}
-    </section>
+{% for question in question_list %}
+    {% if question.content.id == content_pk %}
+    <a href="{% url 'contents:question_detail' content_pk question.id %}">{{question.question_title}}</a><br>
+    {% endif %}
+    
+    {% empty %}
+    <p class="box">このコンテンツに問題はありません。</p>
+{% endfor %}
 {% endblock %}

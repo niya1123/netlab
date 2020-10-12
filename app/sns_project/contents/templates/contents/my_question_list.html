@@ -1,15 +1,12 @@
 {% extends "accounts/base.html" %}
 {% block content %}
-<section id="list" class="container">
-    {% for question in question_list %}
-        {% if question.content.author.id == user.pk %}
-        <a href="{% url 'contents:my_question_update' question.pk %}">{{question.question_title}}</a>
-        {% else %}
-        <p class="box">自分で作成した問題はありません。</p>
-        {% endif %}
-        
-        {% empty %}
-        <p class="box">自分で作成した問題はありません。</p>
-    {% endfor %}
-    </section>
+{% for question in question_list %}
+    {% if question.content.author.id == user.pk %}
+    <a href="{% url 'contents:my_question_update' question.pk %}">{{question.question_title}}</a>
+    <br>
+    {% endif %}
+
+    {% empty %}
+    <p class="box">問題は存在しません。</p>
+{% endfor %}
 {% endblock %}
