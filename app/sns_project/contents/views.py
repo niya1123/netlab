@@ -6,10 +6,12 @@ from django.shortcuts import (get_list_or_404, get_object_or_404, render,
                               resolve_url)
 from django.urls import reverse, reverse_lazy
 from django.views import generic
+from rest_framework import viewsets
 
 from .forms import (ContentSearchForm, CreateContentForm, CreateQuestionForm,
                     MyContentUpdateForm)
 from .models import Content, Question, Tag
+from .serializer import QuestionSerializer
 
 
 class CreateContent(PermissionRequiredMixin, LoginRequiredMixin, generic.edit.CreateView):
@@ -139,7 +141,11 @@ class QuestionDetail(generic.DetailView):
     model = Question
     template_name = 'contents/question_detail.html'
 
-
+class AnswerViewSet(viewsets.ModelViewSet):
+    """回答モデルセット"""
+    querset = Question
+    serializer_class = QuestionSerializer
+    
 class CreateTag(LoginRequiredMixin, generic.CreateView):
     """タグ作成"""
     model = Tag

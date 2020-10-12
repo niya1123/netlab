@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework import routers
 
 from . import views
 
@@ -22,3 +23,6 @@ urlpatterns = [
     path('content/create/done', views.CreateContentDone.as_view(), name='create_content_done'),
     path('', views.ContentList.as_view(), name='content_list'),
 ]
+
+router = routers.DefaultRouter()
+router.register('answer', views.AnswerViewSet, basename="AnswerModel")

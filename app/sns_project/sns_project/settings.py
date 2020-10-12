@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'contents',
     'markdownx',
+    'rest_framework',
 ]
 
 MEDIA_URL = '/media/'
