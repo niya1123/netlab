@@ -25,5 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('contents.urls')),
     path('markdownx/', include('markdownx.urls')),
-    path(r'api/', include(router.urls)),
+    path('api/', include(router.urls)),
 ]

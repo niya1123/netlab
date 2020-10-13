@@ -10,8 +10,8 @@ from rest_framework import viewsets
 
 from .forms import (ContentSearchForm, CreateContentForm, CreateQuestionForm,
                     MyContentUpdateForm)
-from .models import Content, Question, Tag
-from .serializer import QuestionSerializer
+from .models import Content, Question, Tag, Answer
+from .serializer import AnswerSerializer
 
 
 class CreateContent(PermissionRequiredMixin, LoginRequiredMixin, generic.edit.CreateView):
@@ -143,8 +143,8 @@ class QuestionDetail(generic.DetailView):
 
 class AnswerViewSet(viewsets.ModelViewSet):
     """回答モデルセット"""
-    queryset = Question
-    serializer_class = QuestionSerializer
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
 
 class CreateTag(LoginRequiredMixin, generic.CreateView):
     """タグ作成"""

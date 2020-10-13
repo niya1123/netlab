@@ -45,11 +45,16 @@ class Question(models.Model):
         ('3', '選択肢3'),
         ('4', '選択肢4'),
     )
-    answer = models.CharField('答え', max_length=60, choices=CHOICES, blank=True)
+    answer = models.CharField('答え', max_length=60, choices=CHOICES, blank=False)
     content = models.ForeignKey(Content, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.question_title
+
+class Answer(models.Model):
+    """回答モデル"""
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='questions')
+    response = models.CharField('回答', max_length=60, blank=False)
 
 class Review(models.Model):
     """評価"""
