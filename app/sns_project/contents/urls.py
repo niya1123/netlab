@@ -25,4 +25,4 @@ urlpatterns = [
 ]
 
 router = routers.DefaultRouter()
-router.register('answer', views.AnswerViewSet, basename="AnswerModel")
+router.register('answer', views.AnswerViewSet, basename="AnswerModel",)

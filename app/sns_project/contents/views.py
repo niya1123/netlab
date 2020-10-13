@@ -143,9 +143,9 @@ class QuestionDetail(generic.DetailView):
 
 class AnswerViewSet(viewsets.ModelViewSet):
     """回答モデルセット"""
-    querset = Question
+    queryset = Question
     serializer_class = QuestionSerializer
-    
+
 class CreateTag(LoginRequiredMixin, generic.CreateView):
     """タグ作成"""
     model = Tag
