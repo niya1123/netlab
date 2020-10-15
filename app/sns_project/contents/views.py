@@ -146,6 +146,11 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
+class AnswerList(generic.ListView):
+    """回答情報一覧"""
+    model = Answer
+    template_name = 'contents/answer_list.html'
+
 class CreateTag(LoginRequiredMixin, generic.CreateView):
     """タグ作成"""
     model = Tag
