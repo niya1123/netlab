@@ -54,6 +54,7 @@ class Question(models.Model):
 class Answer(models.Model):
     """回答モデル"""
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='questions')
+    solver   = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     response = models.CharField('回答', max_length=60, blank=False)
 
 class Review(models.Model):

@@ -4,6 +4,7 @@
     問題タイトル:{{answer.question}},
     答え:{{answer.response}}, 
     正解: {{answer.question.get_answer_display}}
+    解答者: {{answer.solver.get_age_display}}
     <br>
     {% empty %}
     <p class="box">問題は存在しません。</p>
