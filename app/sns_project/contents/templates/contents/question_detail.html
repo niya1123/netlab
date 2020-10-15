@@ -14,22 +14,23 @@
             <form name="quiz">
                 {{question.question_text}}
                 <br>
-                <input type=radio name="choice">{{question.choice1}}
+                <input type=radio name="choice" value="選択肢1">{{question.choice1}}
                 <br>
-                <input type=radio name="choice">{{question.choice2}}
+                <input type=radio name="choice" value="選択肢2">{{question.choice2}}
                 <br>
-                <input type=radio name="choice">{{question.choice3}}
+                <input type=radio name="choice" value="選択肢3">{{question.choice3}}
                 <br>
-                <input type=radio name="choice">{{question.choice4}}
+                <input type=radio name="choice" value="選択肢4">{{question.choice4}}
                 <br>
-                <input type=button value=" 採点 " onClick="judge()">
+                <input type=button value="採点" onClick="judge()">
             </form>
         </tr>
     </tbody>
 </table>
 <script type="text/javascript">
 function judge() {
-    if(document.quiz.choice[{{question.answer}} - 1].checked){
+    const choice_list = document.quiz.choice;
+    if(choice_list[{{question.answer}} - 1].checked){
         alert("正解!");
     }
     else{
