@@ -44,10 +44,11 @@ function parse_cookies() {
 function judge() {
     var url = "http://localhost:1337/api/answers/";
     var data = JSON.stringify({"response":document.quiz.choice.value, "question":{{question.id}}, "solver":"{{user.pk}}"});
+    // console.log(data);
     var request = new XMLHttpRequest();
     request.open('POST', url, true);
     var cookies = parse_cookies(); 
-    console.log(cookies)
+    // console.log(cookies);
     request.setRequestHeader("Content-Type", "application/json");
     request.setRequestHeader('X-CSRFToken', cookies['csrftoken']); 
     request.send(data);
