@@ -28,7 +28,29 @@
     </tbody>
 </table>
 <script type="text/javascript">
+function parse_cookies() {
+    var cookies = {};
+    if (document.cookie && document.cookie !== '') {
+        document.cookie.split(';').forEach(function (c) {
+            var m = c.trim().match(/(\w+)=(.*)/);
+            if(m !== undefined) {
+                cookies[m[1]] = decodeURIComponent(m[2]);
+            }
+        });
+    }
+    return cookies;
+}
+
 function judge() {
+    var url = "http://localhost:1337/api/answers/";
+    var data = JSON.stringify({"response":document.quiz.choice.value, "question":{{question.id}}, "solver":"{{user.pk}}"});
+    var request = new XMLHttpRequest();
+    request.open('POST', url, true);
+    var cookies = parse_cookies(); 
+    console.log(cookies)
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader('X-CSRFToken', cookies['csrftoken']); 
+    request.send(data);
     const choice_list = document.quiz.choice;
     if(choice_list[{{question.answer}} - 1].checked){
         alert("正解!");
