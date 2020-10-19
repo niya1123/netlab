@@ -24,19 +24,16 @@
         <ul class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
           <li>
-            <a class="nav-item nav-link" href="#">ようこそ、{{user}}!</a>
-          </li>
-          <li>
-            <a class="nav-item nav-link" href="{% url 'accounts:profile' user.pk %}">ユーザー情報閲覧</a>
+            <a class="nav-item nav-link" href="{% url 'accounts:profile' user.pk %}">ようこそ、{{user}}!</a>
           </li>
           <li>
             <a class="nav-item nav-link" href="{% url 'accounts:profile_update' user.pk %}">ユーザー情報更新</a>
           </li>
           <li>
-            <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
+            <a class="nav-item nav-link" href="{% url 'accounts:password_change' %}">パスワードの変更</a>
           </li>
           <li>
-            <a class="nav-item nav-link" href="{% url 'accounts:password_change' %}">パスワードの変更</a>
+            <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
           </li>
           {% if perms.contents.add_content %}
           <li>
