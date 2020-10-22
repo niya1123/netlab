@@ -1,4 +1,5 @@
 {% load static %}
+{% load rules %}
 <!doctype html>
 <html lang="ja">
 <head>
@@ -35,7 +36,8 @@
           <li>
             <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
           </li>
-          {% if perms.contents.add_content %}
+          {% has_perm 'contents.rules_manage_content' user as rules_manage_content %}
+          {% if rules_manage_content is True %}
           <li>
             <!-- <a class="nav-item nav-link " href="{% url 'contents:create_content' %}">コンテンツ作成</a> -->
             <li class="nav-item dropdown">

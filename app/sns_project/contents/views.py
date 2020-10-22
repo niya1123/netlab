@@ -8,19 +8,24 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from rest_framework import viewsets
 
+from rules.contrib.views import PermissionRequiredMixin as rules_perm
+
 from .forms import (ContentSearchForm, CreateContentForm, CreateQuestionForm,
                     MyContentUpdateForm)
-from .models import Content, Question, Tag, Answer
+from .models import Answer, Content, Question, Tag
 from .serializer import AnswerSerializer
 
 
-class CreateContent(PermissionRequiredMixin, LoginRequiredMixin, generic.edit.CreateView):
+# class CreateContent(PermissionRequiredMixin, LoginRequiredMixin, generic.edit.CreateView):
+class CreateContent(rules_perm, LoginRequiredMixin, generic.edit.CreateView):
     """コンテンツ作成ビュー"""
     form_class = CreateContentForm
     template_name = 'contents/create_content.html'
     success_url = reverse_lazy('contents:create_content_done')
-    permission_required = ('contents.add_content') # アプリ名.(add | delete | change )_モデル名
-    raise_exception = False
+    # permission_required = ('contents.add_content') # アプリ名.(add | delete | change )_モデル名
+    # raise_exception = False
+    permission_required = 'contents.rules_manage_content'
+
 
     def form_valid(self, form):
         form.instance.author = self.request.user

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'contents',
     'markdownx',
     'rest_framework',
+    'guardian',
 ]
 
 MEDIA_URL = '/media/'
@@ -136,6 +137,7 @@ STATIC_ROOT = '/usr/src/app/staticfiles/'
 AUTHENTICATION_BACKENDS = (
     'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
 )
 
 # カスタムユーザモデル
