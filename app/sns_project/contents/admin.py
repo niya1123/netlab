@@ -1,9 +1,8 @@
 from django.contrib import admin
-from guardian.admin import GuardedModelAdmin
 from .models import Tag, Content, Review, Question, Answer
 # Register your models here.
 
-class ContentAdmin(GuardedModelAdmin):
+class ContentAdmin(admin.ModelAdmin):
     search_fields = ('title', 'text')
     list_display = ['title', 'is_public', 'updated_at', 'created_at', 'title_len']
     list_filter = ['is_public', 'tag']

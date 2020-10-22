@@ -6,4 +6,3 @@ django-bootstrap4
 django-filter
 django-markdownx
 djangorestframework
-django-guardian

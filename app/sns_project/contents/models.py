@@ -21,7 +21,7 @@ class Content(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='タグ', help_text='必ず1つはタグを選択してください.')
     content_text = MarkdownxField('説明文', help_text='MarkDown形式で記入可能です. ')
-    is_public = models.BooleanField('公開する', default=True)
+    is_public = models.BooleanField('公開する', default=False)
     created_at = models.DateTimeField('作成日', default=timezone.now)
     updated_at = models.DateTimeField('更新日', default=timezone.now)
 

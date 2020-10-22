@@ -156,11 +156,13 @@ class AnswerList(generic.ListView):
     model = Answer
     template_name = 'contents/answer_list.html'
 
-class CreateTag(LoginRequiredMixin, generic.CreateView):
+class CreateTag(rules_perm, LoginRequiredMixin, generic.CreateView):
     """タグ作成"""
     model = Tag
     fields = '__all__'
     success_url = reverse_lazy('contents:content_list')
+    permission_required = 'contents.rules_manage_content'
+
 
 class CreateQuestion(LoginRequiredMixin, generic.CreateView):
     """問題の作成"""
