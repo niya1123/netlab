@@ -6,6 +6,7 @@
     <div class="form-group">
         <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
         {{ field }}
+        {{ form.media }}
         {% if field == form.tag %}
             <a href="javascript:void(0);" onclick="window.open('{% url 'contents:add_tag' %}','subwin','width=500,height=500');">+</a><br>
         {% endif %}
