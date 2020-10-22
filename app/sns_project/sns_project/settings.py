@@ -46,9 +46,6 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -132,6 +129,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = '/usr/src/app/staticfiles/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/usr/src/app/staticfiles/media/'
 
 AUTHENTICATION_BACKENDS = (
     'rules.permissions.ObjectPermissionBackend',
