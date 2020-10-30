@@ -151,10 +151,17 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
-class AnswerList(generic.ListView):
+class AnswerList(rules_perm, generic.ListView):
     """回答情報一覧"""
     model = Answer
     template_name = 'contents/answer_list.html'
+    permission_required = 'contents.rules_manage_content'
+
+class AnswerDetail(rules_perm, generic.DetailView):
+    """回答情報詳細"""
+    model = Answer
+    template_name = 'contents/answer_detail.html'
+    permission_required = 'contents.rules_manage_content'
 
 class CreateTag(rules_perm, LoginRequiredMixin, generic.CreateView):
     """タグ作成"""
