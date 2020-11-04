@@ -21,7 +21,7 @@ var ctx = document.getElementById("myChart");
     options: {
       title: {
         display: true,
-        text: '気温（8月1日~8月7日）'
+        text: "{{user.pk}}"
       },
       scales: {
         yAxes: [{
