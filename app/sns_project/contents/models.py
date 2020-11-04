@@ -56,6 +56,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='questions')
     solver   = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     response = models.CharField('回答', max_length=60, blank=False)
+    is_correct = models.BooleanField(verbose_name='正解かどうか', default=False)
 
 class Review(models.Model):
     """評価"""

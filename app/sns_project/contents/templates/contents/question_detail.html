@@ -43,8 +43,18 @@ function parse_cookies() {
 
 function judge() {
     var url = "http://localhost:1337/api/answers/";
-    var data = JSON.stringify({"response":document.quiz.choice.value, "question":{{question.id}}, "solver":"{{user.pk}}"});
+    var data;
+    // var data = JSON.stringify({"response":document.quiz.choice.value, "question":{{question.id}}, "solver":"{{user.pk}}"});
     // console.log(data);
+    const choice_list = document.quiz.choice;
+    if(choice_list[{{question.answer}} - 1].checked){
+        data = JSON.stringify({"response":document.quiz.choice.value, "question":{{question.id}}, "solver":"{{user.pk}}", "is_correct":"true"});
+        alert("正解!");
+    }
+    else{
+        data = JSON.stringify({"response":document.quiz.choice.value, "question":{{question.id}}, "solver":"{{user.pk}}", "is_correct":"false"});
+        alert("不正解!");
+    }
     var request = new XMLHttpRequest();
     request.open('POST', url, true);
     var cookies = parse_cookies(); 
@@ -52,13 +62,6 @@ function judge() {
     request.setRequestHeader("Content-Type", "application/json");
     request.setRequestHeader('X-CSRFToken', cookies['csrftoken']); 
     request.send(data);
-    const choice_list = document.quiz.choice;
-    if(choice_list[{{question.answer}} - 1].checked){
-        alert("正解!");
-    }
-    else{
-        alert("不正解!");
-    }
 }
 </script>
 {% endblock %}
