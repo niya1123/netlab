@@ -2,9 +2,7 @@
 {% load static %}
 {% block content %}
 {% for answer in answer_list %}
-    {% if answer.question.content.author == user %}
     <a href="{% url 'contents:answer_detail' answer.pk %}">回答情報{{answer.pk}}</a>
-    {% endif %}
     <br>
     {% empty %}
     <p class="box">問題は存在しません。</p>
