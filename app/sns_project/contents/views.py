@@ -150,6 +150,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
     """回答モデルセット"""
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+    filter_fields = ('question',)
 
 class AnswerList(rules_perm, generic.ListView):
     """回答情報一覧"""

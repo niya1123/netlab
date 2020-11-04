@@ -44,7 +44,13 @@ INSTALLED_APPS = [
     'contents',
     'markdownx',
     'rest_framework',
+    'django_filters',
 ]
+
+REST_FRAMEWORK = {
+    #フィルタを追加
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
