@@ -1,5 +1,9 @@
 {% extends "accounts/base.html" %}
 {% block content %}
-{{a_q}}
+{% for key, value in a_q.items %}
+{% for v in value %}
+{{key}}: {{v}}
+{% endfor %}
+{% endfor %}
 
 {% endblock %}
