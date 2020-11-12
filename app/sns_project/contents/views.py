@@ -84,7 +84,7 @@ class MyContentUpdate(LoginRequiredMixin, generic.UpdateView):
         context['content_pk'] = self.kwargs.get('pk')
         return context
 
-class MyContentDelete(generic.DeleteView):
+class MyContentDelete(LoginRequiredMixin, generic.DeleteView):
     """自分のコンテンツの削除"""
     model = Content
     form_class = CreateContentForm
@@ -109,7 +109,7 @@ class MyQuestionUpdate(LoginRequiredMixin, generic.UpdateView):
     def get_success_url(self):
         return resolve_url('contents:my_question_list', pk=self.request.user.pk)
 
-class MyQuestionDelete(generic.DeleteView):
+class MyQuestionDelete(LoginRequiredMixin, generic.DeleteView):
     """自分の問題削除"""
     model = Question
     form_class = CreateQuestionForm
@@ -172,10 +172,11 @@ class CreateTag(rules_perm, LoginRequiredMixin, generic.CreateView):
     permission_required = 'contents.rules_manage_content'
 
 
-class CreateQuestion(LoginRequiredMixin, generic.CreateView):
+class CreateQuestion(rules_perm, LoginRequiredMixin, generic.CreateView):
     """問題の作成"""
     form_class = CreateQuestionForm
     template_name = 'contents/create_question.html'
+    permission_required = 'contents.rules_manage_content'
 
     def form_valid(self, form):
         content = get_object_or_404(Content, pk=self.kwargs.get('pk'))
@@ -185,8 +186,9 @@ class CreateQuestion(LoginRequiredMixin, generic.CreateView):
     def get_success_url(self):
         return reverse('contents:content_detail', kwargs={'pk': self.kwargs.get('pk')})
 
-class AddTag(CreateTag):
+class AddTag(rules_perm, LoginRequiredMixin, CreateTag):
     """タグを新規に登録する"""
+    permission_required = 'contents.rules_manage_content'
 
     def form_valid(self, form):
         tag = form.save()
