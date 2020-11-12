@@ -1,9 +1,5 @@
 {% extends "accounts/base.html" %}
 {% block content %}
-{% for answer in answer_list %}
-    <a href="{% url 'contents:answer_detail' answer.pk %}">「{{answer.question}}」の回答情報</a>
-    <br>
-    {% empty %}
-    <p class="box">問題は存在しません。</p>
-{% endfor %}
+{{a_q}}
+
 {% endblock %}

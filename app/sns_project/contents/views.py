@@ -158,6 +158,19 @@ class AnswerList(rules_perm, generic.ListView):
     template_name = 'contents/answer_list.html'
     permission_required = 'contents.rules_manage_content'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dictionary = {}
+        data = []
+        for question in list(Question.objects.all()):
+            for answer in list(Answer.objects.all()):
+                if answer.question.id is question.id:
+                    data.append(answer)
+                dictionary[question.id] = data
+            data = []
+        context['a_q'] = dictionary
+        return context
+
 class AnswerDetail(rules_perm, generic.DetailView):
     """回答情報詳細"""
     model = Answer
