@@ -166,7 +166,7 @@ class AnswerList(rules_perm, generic.ListView):
             for answer in list(Answer.objects.all()):
                 if answer.question.id is question.id:
                     data.append(answer)
-                dictionary[question.id] = data
+                dictionary[question] = data
             data = []
         context['a_q'] = dictionary
         return context

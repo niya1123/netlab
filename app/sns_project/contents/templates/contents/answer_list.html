@@ -1,9 +1,7 @@
 {% extends "accounts/base.html" %}
 {% block content %}
-{% for key, value in a_q.items %}
-{% for v in value %}
-{{key}}: {{v}}
-{% endfor %}
+{% for question, answer in a_q.items %}
+「{{question}}」の統計情報
 {% endfor %}
 
 {% endblock %}
