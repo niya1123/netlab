@@ -164,12 +164,11 @@ class AnswerDetail(rules_perm, generic.DetailView):
     template_name = 'contents/answer_detail.html'
     permission_required = 'contents.rules_manage_content'
 
-class CreateTag(rules_perm, LoginRequiredMixin, generic.CreateView):
+class CreateTag(generic.CreateView):
     """タグ作成"""
     model = Tag
     fields = '__all__'
     success_url = reverse_lazy('contents:content_list')
-    permission_required = 'contents.rules_manage_content'
 
 
 class CreateQuestion(rules_perm, LoginRequiredMixin, generic.CreateView):
