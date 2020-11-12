@@ -131,7 +131,7 @@ class ContentDetail(generic.DetailView):
         else:
             raise Http404
 
-class QuestionList(generic.ListView):
+class QuestionList(LoginRequiredMixin, generic.ListView):
     """問題のリスト"""
     model = Question
     template_name = 'contents/question_list.html'
@@ -141,7 +141,7 @@ class QuestionList(generic.ListView):
         context['content_pk'] = self.kwargs.get('pk')
         return context
 
-class QuestionDetail(generic.DetailView):
+class QuestionDetail(LoginRequiredMixin, generic.DetailView):
     """問題の詳細"""
     model = Question
     template_name = 'contents/question_detail.html'
