@@ -4,48 +4,66 @@
 <details>
     <summary>「{{question}}」の統計情報</summary>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-    <canvas id="myChart{{forloop.counter}}" width="3" height="1"></canvas>
+    <canvas id="myChart{{forloop.counter}}_num" width="3" height="1"></canvas>
+    <canvas id="myChart{{forloop.counter}}_sex" width="3" height="1"></canvas>
 </details>
 <script type="text/javascript">
-    var ctx = document.getElementById("myChart{{forloop.counter}}");
-      var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['8月1日', '8月2日', '8月3日', '8月4日', '8月5日', '8月6日', '8月7日'],
-          datasets: [
-            {
-              label: '最高気温(度）',
-              data: [35, 34, 37, 35, 34, 35, 34, 25],
-              borderColor: "rgba(255,0,0,1)",
-              backgroundColor: "rgba(0,0,0,0)"
-            },
-            {
-              label: '最低気温(度）',
-              data: [25, 27, 27, 25, 26, 27, 25, 21],
-              borderColor: "rgba(0,0,255,1)",
-              backgroundColor: "rgba(0,0,0,0)"
-            }
-          ],
-        },
-        options: {
-          title: {
-            display: true,
-            text: "{{question}}"
-          },
-          scales: {
-            yAxes: [{
-              ticks: {
-                suggestedMax: 40,
-                suggestedMin: 0,
-                stepSize: 10,
-                callback: function(value, index, values){
-                  return  value +  '度'
-                }
-              }
-            }]
-          },
+    var ctx = document.getElementById("myChart{{forloop.counter}}_num");
+    var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['選択肢1','選択肢2','選択肢3','選択肢4'],
+      datasets: [
+        {
+          label: "人数",
+          data: [3,5,2,8],
+          backgroundColor: "#48FA17"
         }
-      });
-    </script>
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: '各選択肢の人数'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            suggestedMax: 10,
+            suggestedMin: 0,
+            stepSize: 1,
+            callback: function(value, index, values){
+              return  value +  '人'
+            }
+          }
+        }]
+      },
+    }
+  });
+</script>
+<script>
+  var ctx = document.getElementById("myChart{{forloop.counter}}_sex");
+  var myPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ["男性", "女性", "その他"], //データ項目のラベル
+      datasets: [{
+          backgroundColor: [
+              "#08A4FF",
+              "#F52827",
+              "#D9C7BD"
+          ],
+          data: [11,4,3] //グラフのデータ
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        //グラフタイトル
+        text: '性別比'
+      }
+    }
+  });
+</script>
 {% endfor %}
 {% endblock %}
