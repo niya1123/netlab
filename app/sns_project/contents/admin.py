@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tag, Content, Review, Question, Answer
+from .models import Tag, Content, Review, Question, Answer, Port, Container
 # Register your models here.
 
 class ContentAdmin(admin.ModelAdmin):
@@ -18,3 +18,5 @@ admin.site.register(Tag)
 admin.site.register(Review)
 admin.site.register(Question)
 admin.site.register(Answer)
+admin.site.register(Port)
+admin.site.register(Container)

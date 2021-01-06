@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Content, Question, Tag
+from .models import Content, Question, Tag, Container, Port
 from .widgets import CustomCheckboxSelectMultiple
 
 
@@ -48,6 +48,17 @@ class MyContentUpdateForm(forms.ModelForm):
         model = Content
         fields = ('title', 'tag', 'content_text', 'is_public')
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+class ContainerForm(forms.ModelForm):
+    """コンテナフォーム"""
+    class Meta:
+        model = Container
+        fields = ('url', 'port_num', 'exe')
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

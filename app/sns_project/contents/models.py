@@ -58,6 +58,20 @@ class Answer(models.Model):
     response = models.CharField('回答', max_length=60, blank=False)
     is_correct = models.BooleanField(verbose_name='正解かどうか', default=False)
 
+class Port(models.Model):
+    """ポート番号モデル"""
+    port_num = models.CharField('ポート番号', max_length=10, unique=True)
+
+    def __str__(self):
+        return self.port_num
+
+class Container(models.Model):
+    """コンテナモデル"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    port_num = models.ManyToManyField(Port, verbose_name='ポート番号')
+    url = models.CharField('URL', max_length=255)
+    exe= models.TextField('実行手順')
+
 class Review(models.Model):
     """評価"""
     SCORE_CHOICES = (

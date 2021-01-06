@@ -6,6 +6,8 @@ from . import views
 app_name = 'contents'
 
 urlpatterns = [
+    path('content/create/container/done', views.CreateContainerDone.as_view(),name="create_container_done"),
+    path('content/create/container', views.CreateContainer.as_view(),name="create_container"),
     path('content/answer/<int:pk>/detail', views.AnswerDetail.as_view(), name='answer_detail'),
     path('content/answer/list', views.AnswerList.as_view(), name='answer_list'),
     path('content/question/delete/done', views.MyQuestionDeleteDone.as_view(), name='my_question_delete_done'),

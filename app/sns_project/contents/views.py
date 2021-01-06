@@ -11,8 +11,8 @@ from rest_framework import viewsets
 from rules.contrib.views import PermissionRequiredMixin as rules_perm
 
 from .forms import (ContentSearchForm, CreateContentForm, CreateQuestionForm,
-                    MyContentUpdateForm)
-from .models import Answer, Content, Question, Tag
+                    MyContentUpdateForm, ContainerForm)
+from .models import Answer, Content, Question, Tag, Container
 from .serializer import AnswerSerializer
 
 
@@ -31,9 +31,27 @@ class CreateContent(rules_perm, LoginRequiredMixin, generic.edit.CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class CreateContainer(rules_perm, LoginRequiredMixin, generic.edit.CreateView):
+    """コンテナ作成ビュー"""
+    form_class = ContainerForm
+    template_name = 'contents/create_container.html'
+    success_url = reverse_lazy('contents:create_container_done')
+    # permission_required = ('contents.add_content') # アプリ名.(add | delete | change )_モデル名
+    # raise_exception = False
+    permission_required = 'contents.rules_manage_content'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 class CreateContentDone(generic.TemplateView):
     """コンテンツ投稿完了を知らせる"""
     template_name = 'contents/create_content_done.html'
+
+class CreateContainerDone(generic.TemplateView):
+    """コンテナ作成完了を知らせる"""
+    # model = Container
+    template_name = 'contents/create_container_done.html'
 
 class ContentList(generic.ListView):
     """コンテンツのリスト"""
