@@ -40,3 +40,12 @@ class SSEL(models.Model):
 
     def __str__(self):
         return self.ssel_name
+
+class QuestionTemplate(models.Model):
+    """
+    問題テンプレート
+    """
+    question_template = models.TextField('問題テンプレート')
+
+    def __str__(self):
+        return self.question_template
