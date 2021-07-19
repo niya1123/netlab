@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'markdownx',
     'rest_framework',
     'django_filters',
+    'dynamic_drill',
 ]
 
 REST_FRAMEWORK = {
