@@ -49,3 +49,10 @@ class QuestionTemplate(models.Model):
 
     def __str__(self):
         return self.question_template
+
+class DynamicDrill(models.Model):
+    """
+    動的ドリル
+    """
+    question_template = models.ForeignKey(QuestionTemplate, on_delete=models.CASCADE)
+    answer = models.BooleanField(verbose_name='正解かどうか', default=False)
