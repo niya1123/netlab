@@ -1,8 +1,0 @@
-{{user.username}}様 会員登録手続きを行っていただき, ありがとうございます.
-
-本メールは仮登録をご案内するものです. 引き続き下記URLより本登録が可能です.
-
-本登録用URL
-http://localhost:1337{% url 'accounts:user_create_complete' token %}
-
-LearnSNSより
