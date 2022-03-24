@@ -1,0 +1,15 @@
+{
+    "text": "test_text",
+    "state":{
+        "opened": true
+    },
+    "a_attr":{
+        "text": "hogehoge",
+        "state":{
+            "opened": false
+        },
+        "a_attr":{
+            "test_data": "foo"
+        }
+    }
+}
